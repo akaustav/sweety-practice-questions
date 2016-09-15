@@ -1,0 +1,57 @@
+class NoName {
+
+    func constructor () {
+        this.dict = dict();
+    }
+
+    func helper_func(v) {
+        if (v not in this.dict.keys()) {
+            this.dict[v] = [v, [v]];
+        }
+
+        while (v != this.dict[v][0]) {
+            v = this.dict[v][0];
+        }
+
+        return v;
+    }
+
+    func add (items) {
+        for (item in items) {
+            a = item[0];
+            b = item[1];
+            result_a = this.helper_func(a);
+            result_b = this.helper_func(b);
+
+            if (result_a != result_b) {
+                if (this.dict[result_a][1].length > this.dict[result_b][1].length) {
+                    this.dict[result_a][1].concat(this.dict[result_b][1]);
+                    this.dict[result_b][0] = a;
+                } else {
+                    this.dict[result_b][1].concat(this.dict[result_a][1]);
+                    this.dict[result_a][0] = b;
+                }
+            }
+        }
+    }
+
+    func print () {
+        for (n in this.dict.keys()) {
+            r = this.helper_func(this.dict[n][0]);
+            print '{}: {}'.format(n, this.dict[r][1]);
+        }
+    }
+
+}
+   
+instance = new NoName();
+instance.add([
+    ('alice', 'bob'),
+    ('bob', 'caspar'),
+    ('jasmine', 'oscar'),
+    ('jasmine', 'steve'),
+    ('oscar', 'zed'),
+    ('oscar', 'steve'),
+    ('steve', 'zed')
+]);
+instance.print();

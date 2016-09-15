@@ -1,7 +1,8 @@
 /*
 this.dict = {
-    'alice': ['alice', ['alice']],
-    'bob': ['bob', ['bob']]
+    'alice': ['bob', ['alice']],
+    'bob': ['bob', ['bob', 'alice', 'casper']],
+    'caspar': ['bob', ['caspar']]
 }
 */
 
@@ -11,9 +12,7 @@ Dict.prototype.keys = function keys() {
     return Object.keys(this);
 };
 
-var x = new Dict();
-var y = new Dict();
-
+// Constructor
 function NoName() {
     this.dict = new Dict();
 }
@@ -22,8 +21,6 @@ NoName.prototype.helper_func = function helper_func(v) {
     if (!this.dict.keys().includes(v)) {
         this.dict[v] = [v, [v]];
     }
-
-    debugger;
 
     while (v != this.dict[v][0]) {
         v = this.dict[v][0];
@@ -77,14 +74,15 @@ instance.add([
 instance.print();
 
 
-/* Output
+/*
+Output:
 
-alice: bob,alice,caspar
-bob: bob,alice,caspar
-caspar: bob,alice,caspar
-jasmine: oscar,jasmine,steve,zed
-oscar: oscar,jasmine,steve,zed
-steve: oscar,jasmine,steve,zed
-zed: oscar,jasmine,steve,zed
+    alice: bob,alice,caspar
+    bob: bob,alice,caspar
+    caspar: bob,alice,caspar
+    jasmine: oscar,jasmine,steve,zed
+    oscar: oscar,jasmine,steve,zed
+    steve: oscar,jasmine,steve,zed
+    zed: oscar,jasmine,steve,zed
 
 */
